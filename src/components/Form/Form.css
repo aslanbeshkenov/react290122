@@ -1,0 +1,15 @@
+.input-submit {
+    height: 22px;
+    width: 110px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color:#3F51B5;
+    color:#fff;
+    border: none;
+};
+
+.input-text {
+    width: 220px;
+    height: 20px;
+    border-radius: 5px;
+}
