@@ -1,9 +1,9 @@
 import './Message.css';
 
-export const Message = ({ text }) => {
+export const Message = ({ text, author }) => {
     return (
-        <h3 className="Message">
-            Message, {text}
-        </h3>
+        <p className="Message">
+            <span>{author}:</span> {text}
+        </p>
     );
 };
