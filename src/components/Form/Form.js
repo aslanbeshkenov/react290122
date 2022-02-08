@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Form.css";
+import { TextField, Button } from "@mui/material";
 
 export const Form = ({ onSubmit }) => {
     const [value, setValue] = useState('');
@@ -17,8 +18,15 @@ export const Form = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input value={value} onChange={handleChange} type="text" autoFocus className="input-text" />
-            <input type="submit" className="input-submit" />
+            <TextField
+                label="Введите сообщение"
+                variant="filled"
+                color="success"
+                onChange={handleChange}
+                value={value}
+                focused
+                autoFocus />
+            <Button variant="contained" type="submit" className="input-submit" sx={{}}>Отправить</Button>
         </form>
     );
 };

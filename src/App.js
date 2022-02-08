@@ -1,42 +1,42 @@
 import './App.css';
-import { Message } from './components/Message/Message';
-import { Counter } from './components/Counter';
 import { useEffect, useState } from 'react';
 import { Form } from './components/Form/Form';
+import { AUTHORS } from './utils/constans';
+import { MessageList } from './components/MessageList/MessageList';
+import { Chats } from './components/Chats/chats';
 
 const myText = "Hello from App";
 
 function App() {
-  const [messageList, setMessageList] = useState([
-    // { text: "Hello", author: "Me" },
-    // { text: "Hello. I am bot", author: "Robot" }
-  ]);
+  const [messageList, setMessageList] = useState([]);
 
-  const handleAddMessage = (text, author = "Me") => {
-    setMessageList((prevMessageList) => [...prevMessageList, { text: text, author: author }]);
+  const handleAddMessage = (text, author) => {
+    sendMessage(text, AUTHORS.ME)
   };
 
-  useEffect(() => {
-    // const { author } = messageList;
-    // console.log(messageList[messageList.length - 1].author);
-    if (messageList.length !== 0 && messageList[messageList.length - 1].author == "Me") {
-      handleAddMessage("Hello, I am Bot!", "Robot");
-    };
-    // const interval = setInterval(() => {
-    //   console.log(1);
-    // }, 1500);
+  const sendMessage = (text, author) => {
+    setMessageList((prevMessageList) => [...prevMessageList, { text: text, author: author }]);
+  }
 
-    // if (messageList.length !== 0) {
-    //   clearInterval(interval);
-    // }
+  useEffect(() => {
+    let interval;
+    if (messageList[messageList.length - 1]?.author === AUTHORS.ME) {
+      interval = setTimeout(() => {
+        sendMessage("Hello, I am Bot!", AUTHORS.BOT);
+      }, 1500);
+    };
+
+    return () => {
+      clearTimeout(interval);
+    };
   }, [messageList]);
 
   return (
     <div className="App">
-      <header className="App-header">{myText}
-        {messageList.map(({ text, author }, index) => (
-          <Message text={text} key={index} author={author} />
-        ))}
+      <Chats />
+      <header className="App-header">
+        <h4>{myText}</h4>
+        <MessageList messageList={messageList} />
         <Form onSubmit={handleAddMessage} />
       </header>
     </div>
