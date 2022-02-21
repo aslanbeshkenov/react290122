@@ -5,7 +5,6 @@ import { Profile } from "../Profile/profile";
 
 const Home = () => <h2>Home page</h2>;
 
-
 export const Router = () => {
     return (
         <BrowserRouter>
@@ -14,7 +13,7 @@ export const Router = () => {
             <div><Link to="/profile">My Profile</Link></div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="/chats" element={<Chats />}>
                     <Route path=":chatId" element={<Chat />} />
                 </Route>
